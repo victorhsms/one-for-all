@@ -95,3 +95,102 @@ CREATE TABLE plans (
   plan_value FLOAT NOT NULL
 ) engine = InnoDB;
 
+CREATE TABLE users (
+	user_id INT PRIMARY KEY AUTO_INCREMENT,
+	user_name VARCHAR(255) NOT NULL,
+	user_age SMALLINT UNSIGNED NOT NULL,
+	plan_id INT NOT NULL,
+	plan_assigned_date DATETIME NOT NULL,
+	FOREIGN KEY (plan_id) REFERENCES plans(plan_id)
+) engine = InnoDB;
+
+INSERT INTO plans (plan_name, plan_value)
+VALUES
+  ('gratuito', 0),
+	('familiar', 7.99),
+	('universitário', 5.99),
+	('pessoal', 6.99);
+
+INSERT INTO users (user_name, user_age, plan_id, plan_assigned_date)
+VALUES
+  ("Thati", 23, 1, '2019-10-20'),
+	('Cintia', 35, 2, '2017-12-30'),
+	('Bill', 20, 3, '2019-06-05'),
+	('Roger', 45, 4, '2020-05-13'),
+	('Norman', 58, 4, '2017-02-17'),
+	('Patrick', 33, 2, '2017-01-06'),
+	('Vivian', 26, 3, '2018-01-05'),
+	('Carol', 19, 3, '2018-02-14'),
+	('Angelina', 42, 2, '2018-04-29'),
+	('Paul', 46, 2, '2017-01-17');
+
+CREATE TABLE artists_followed (
+  artist_id INT NOT NULL,
+	user_id INT NOT NULL,
+	CONSTRAINT PRIMARY KEY(artist_id, user_id),
+	FOREIGN KEY (artist_id) REFERENCES artists(artist_id),
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+) engine = InnoDB;
+
+CREATE TABLE musics_played (
+	user_id INT NOT NULL,
+	music_id INT NOT NULL,
+	date_played DATETIME NOT NULL,
+	CONSTRAINT PRIMARY KEY(music_id, user_id),
+	FOREIGN KEY (music_id) REFERENCES musics(music_id),
+	FOREIGN KEY (user_id) REFERENCES users(user_id)
+) engine = InnoDB;
+
+INSERT INTO artists_followed (artist_id, user_id)
+VALUES
+	(1, 1), (4, 1), (3, 1),
+	(1, 2), (3, 2), (2, 3),
+  (1, 3), (4, 4), (5, 5),
+	(6, 5),	(6, 6),	(3, 6),
+	(1, 6),	(2, 7), (5, 7),
+	(1, 8),	(5, 8),	(6, 9),
+	(4, 9),	(3, 9),	(2, 10),
+	(6, 10);
+
+INSERT INTO reproduction_history (user_id, music_id, date_played)
+VALUES	
+  (1, 36, '2020-02-28 10:45:55'),
+	(1, 25, '2020-05-02 05:30:35'),
+  (1, 23, '020-03-06 11:22:33'),
+  (1, 14, '2020-08-05 08:05:17'),
+  (6, 38, '2019-02-07 20:33:48'),
+  (8, 39, '2018-03-21 16:56:40'),
+  (2, 24, '2020-05-16 06:16:22'),
+  (3, 6, '2020-11-13 16:55:13'),
+  (3, 3, '2020-12-05 18:38:30'),
+  (5, 1, '2020-11-10 13:52:27'),
+  (10, 21, '2017-12-04 05:33:43'),
+  (2, 39, '2020-09-21 13:14:46'),
+  (9, 9, '2020-04-01 03:36:00'),
+  (4, 27, '2021-01-09 01:44:33'),
+  (10, 13, '2017-12-25 01:03:57');
+  (5, 12, '2017-02-24 21:14:22'),
+  (5, 14, '2020-08-06 15:23:43'),
+  (1, 15, '2020-09-14 16:32:22'),
+  (2, 21, '2020-10-09 12:27:48'),
+  (7, 5, '2018-05-09 22:30:49'),
+  (6, 22, '2018-05-29 14:56:41'),
+  (4, 35, '2021-07-10 15:20:30'),
+  (7, 11, '2018-01-16 18:40:43'),
+  (3, 26, '2020-07-30 10:00:00'),
+  (7, 4, '2020-07-27 12:52:58'),
+  (8, 40, '2020-10-18 13:38:05'),
+  (9, 16, '2021-05-24 17:23:45'),
+  (10, 20, '2017-02-06 08:21:34'),
+  (6, 29, '2017-01-24 00:31:17'),
+  (8, 33, '2021-08-15 21:37:09'),
+  (6, 30, '2017-10-12 12:35:20'),
+  (9, 17, '2018-12-07 22:48:52'),
+  (4, 2, '2021-08-15 17:10:10'),
+  (8, 32, '2019-05-25 08:14:03'),
+  (10, 12, '2017-07-27 05:24:49'),
+  (9, 8, '2021-03-14 06:14:26'),
+  (5, 7, '2020-07-03 19:33:28'),
+  (2, 34, '2020-01-02 07:40:33'),
+
+
