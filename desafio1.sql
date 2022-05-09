@@ -5,8 +5,8 @@ USE SpotifyClone;
 
 CREATE TABLE artists (
   artist_id INT PRIMARY KEY AUTO_INCREMENT,
-  artist_name VARCHAR(255) NOT NULL,
-) engine = InnoDB;
+  artist_name VARCHAR(255) NOT NULL
+);
 
 CREATE TABLE albums (
 	album_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -14,7 +14,7 @@ CREATE TABLE albums (
 	artist_id INT NOT NULL,
 	release_year YEAR NOT NULL,
 	FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
-) engine = InnoDB;
+);
 
 CREATE TABLE musics (
 	music_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -22,7 +22,7 @@ CREATE TABLE musics (
   time_duration INT NOT NULL,
   album_id INT NOT NULL,
   FOREIGN KEY(album_id) REFERENCES albums(album_id)
-) engine = InnoDB;
+);
 
 INSERT INTO artists (artist_name)
 VALUES 
@@ -33,7 +33,7 @@ VALUES
   ('Tyler Isle'),
   ('Fog');
 
-INSERT INTO albuns (album_title, artist_id, release_year)
+INSERT INTO albums (album_title, artist_id, release_year)
 VALUES
   ('Envious', 1, 1990),
   ('Exuberant', 1, 1993),
@@ -93,7 +93,7 @@ CREATE TABLE plans (
   plan_id INT PRIMARY KEY AUTO_INCREMENT ,
   plan_name VARCHAR(255) NOT NULL,
   plan_value FLOAT NOT NULL
-) engine = InnoDB;
+);
 
 CREATE TABLE users (
 	user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -102,7 +102,7 @@ CREATE TABLE users (
 	plan_id INT NOT NULL,
 	plan_assigned_date DATETIME NOT NULL,
 	FOREIGN KEY (plan_id) REFERENCES plans(plan_id)
-) engine = InnoDB;
+);
 
 INSERT INTO plans (plan_name, plan_value)
 VALUES
@@ -130,7 +130,7 @@ CREATE TABLE artists_followed (
 	CONSTRAINT PRIMARY KEY(artist_id, user_id),
 	FOREIGN KEY (artist_id) REFERENCES artists(artist_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
-) engine = InnoDB;
+);
 
 CREATE TABLE musics_played (
 	user_id INT NOT NULL,
@@ -139,7 +139,7 @@ CREATE TABLE musics_played (
 	CONSTRAINT PRIMARY KEY(music_id, user_id),
 	FOREIGN KEY (music_id) REFERENCES musics(music_id),
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
-) engine = InnoDB;
+);
 
 INSERT INTO artists_followed (artist_id, user_id)
 VALUES
@@ -152,7 +152,7 @@ VALUES
 	(4, 9),	(3, 9),	(2, 10),
 	(6, 10);
 
-INSERT INTO reproduction_history (user_id, music_id, date_played)
+INSERT INTO musics_played (user_id, music_id, date_played)
 VALUES	
   (1, 36, '2020-02-28 10:45:55'),
 	(1, 25, '2020-05-02 05:30:35'),
@@ -192,5 +192,3 @@ VALUES
   (9, 8, '2021-03-14 06:14:26'),
   (5, 7, '2020-07-03 19:33:28'),
   (2, 34, '2020-01-02 07:40:33');
-
-
