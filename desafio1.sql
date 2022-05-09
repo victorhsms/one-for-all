@@ -90,9 +90,9 @@ VALUES
 	('You Make Me Feel So..', 83, 10);
 
 CREATE TABLE plans (
-  plan_id INT PRIMARY KEY AUTO_INCREMENT ,
+  plan_id INT PRIMARY KEY AUTO_INCREMENT,
   plan_name VARCHAR(255) NOT NULL,
-  plan_value FLOAT NOT NULL
+  plan_value DOUBLE NOT NULL
 );
 
 CREATE TABLE users (
