@@ -1,14 +1,12 @@
 DROP DATABASE IF EXISTS SpotifyClone;
 CREATE DATABASE SpotifyClone;
 
-USE SpotifyClone;
-
-CREATE TABLE artists (
+CREATE TABLE SpotifyClone.artists (
   artist_id INT PRIMARY KEY AUTO_INCREMENT,
   artist_name VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE albums (
+CREATE TABLE SpotifyClone.albums (
 	album_id INT PRIMARY KEY AUTO_INCREMENT,
 	album_title VARCHAR(255) NOT NULL,
 	artist_id INT NOT NULL,
@@ -16,7 +14,7 @@ CREATE TABLE albums (
 	FOREIGN KEY (artist_id) REFERENCES artists(artist_id)
 );
 
-CREATE TABLE musics (
+CREATE TABLE SpotifyClone.musics (
 	music_id INT PRIMARY KEY AUTO_INCREMENT,
   music_title VARCHAR(255) NOT NULL,
   time_duration INT NOT NULL,
@@ -24,7 +22,7 @@ CREATE TABLE musics (
   FOREIGN KEY(album_id) REFERENCES albums(album_id)
 );
 
-INSERT INTO artists (artist_name)
+INSERT INTO SpotifyClone.artists (artist_name)
 VALUES 
   ('Walter Phoenix'),
   ('Peter Strong'),
@@ -33,7 +31,7 @@ VALUES
   ('Tyler Isle'),
   ('Fog');
 
-INSERT INTO albums (album_title, artist_id, release_year)
+INSERT INTO SpotifyClone.albums (album_title, artist_id, release_year)
 VALUES
   ('Envious', 1, 1990),
   ('Exuberant', 1, 1993),
@@ -46,7 +44,7 @@ VALUES
   ('No guarantees', 5, 2015),
   ('Apparatus', 6, 2015);
 
-INSERT INTO musics (music_title, time_duration, album_id)
+INSERT INTO SpotifyClone.musics (music_title, time_duration, album_id)
 VALUES
   ('Soul For Us', 200, 1),
 	('Reflections Of Magic', 163, 1),
@@ -89,13 +87,13 @@ VALUES
 	('Baby', 136, 10),
 	('You Make Me Feel So..', 83, 10);
 
-CREATE TABLE plans (
+CREATE TABLE SpotifyClone.plans (
   plan_id INT PRIMARY KEY AUTO_INCREMENT,
   plan_name VARCHAR(255) NOT NULL,
   plan_value DOUBLE NOT NULL
 );
 
-CREATE TABLE users (
+CREATE TABLE SpotifyClone.users (
 	user_id INT PRIMARY KEY AUTO_INCREMENT,
 	user_name VARCHAR(255) NOT NULL,
 	user_age SMALLINT UNSIGNED NOT NULL,
@@ -104,14 +102,14 @@ CREATE TABLE users (
 	FOREIGN KEY (plan_id) REFERENCES plans(plan_id)
 );
 
-INSERT INTO plans (plan_name, plan_value)
+INSERT INTO SpotifyClone.plans (plan_name, plan_value)
 VALUES
   ('gratuito', 0),
 	('familiar', 7.99),
 	('universitário', 5.99),
 	('pessoal', 6.99);
 
-INSERT INTO users (user_name, user_age, plan_id, plan_assigned_date)
+INSERT INTO SpotifyClone.users (user_name, user_age, plan_id, plan_assigned_date)
 VALUES
   ("Thati", 23, 1, '2019-10-20'),
 	('Cintia', 35, 2, '2017-12-30'),
@@ -124,7 +122,7 @@ VALUES
 	('Angelina', 42, 2, '2018-04-29'),
 	('Paul', 46, 2, '2017-01-17');
 
-CREATE TABLE artists_followed (
+CREATE TABLE SpotifyClone.artists_followed (
   artist_id INT NOT NULL,
 	user_id INT NOT NULL,
 	CONSTRAINT PRIMARY KEY(artist_id, user_id),
@@ -132,7 +130,7 @@ CREATE TABLE artists_followed (
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-CREATE TABLE musics_played (
+CREATE TABLE SpotifyClone.musics_played (
 	user_id INT NOT NULL,
 	music_id INT NOT NULL,
 	date_played DATETIME NOT NULL,
@@ -141,7 +139,7 @@ CREATE TABLE musics_played (
 	FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
-INSERT INTO artists_followed (artist_id, user_id)
+INSERT INTO SpotifyClone.artists_followed (artist_id, user_id)
 VALUES
 	(1, 1), (4, 1), (3, 1),
 	(1, 2), (3, 2), (2, 3),
@@ -152,7 +150,7 @@ VALUES
 	(4, 9),	(3, 9),	(2, 10),
 	(6, 10);
 
-INSERT INTO musics_played (user_id, music_id, date_played)
+INSERT INTO SpotifyClone.musics_played (user_id, music_id, date_played)
 VALUES	
   (1, 36, '2020-02-28 10:45:55'),
 	(1, 25, '2020-05-02 05:30:35'),
